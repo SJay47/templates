@@ -15,7 +15,7 @@ jobs:
           # this fetches all history so that we can read each commit
           fetch-depth: 0
           ref: ${{ github.head_ref }}
-          token: ${{ secrets.Workflow_PAT }}
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Rename the project
         run: |
