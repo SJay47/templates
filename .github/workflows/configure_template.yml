@@ -2,12 +2,15 @@ name: Rename the project from template
 
 on: [push]
 
-permissions: write-all
-
 jobs:
   rename-project:
     if: ${{ !contains (github.repository, '-template') }}
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+      workflows: write
+    name: Rename the project
     steps:
       - uses: actions/checkout@v3
         with:
@@ -15,7 +18,7 @@ jobs:
           # this fetches all history so that we can read each commit
           fetch-depth: 0
           ref: ${{ github.head_ref }}
-          token: ${{ secrets.Workflow_PAT }}
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Rename the project
         run: |
